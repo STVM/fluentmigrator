@@ -256,6 +256,15 @@ namespace FluentMigrator.Tests.Unit.Generators.SQLite
         }
 
         [Test]
+        public void CanCreateTableWithColumnUnique()
+        {
+          var expression = GeneratorTestHelper.GetCreateTableExpressionWithUnique();
+
+          var result = Generator.Generate(expression);
+          result.ShouldBe("CREATE TABLE \"TestTable1\" (\"TestColumn1\" TEXT NOT NULL, \"TestColumn2\" INTEGER NOT NULL UNIQUE)");
+        }
+
+        [Test]
         public override void CanDropTableWithCustomSchema()
         {
             var expression = GeneratorTestHelper.GetDeleteTableExpression();

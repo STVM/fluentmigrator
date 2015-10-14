@@ -56,5 +56,10 @@ namespace FluentMigrator.Runner.Generators.SQLite
 
             return null;
         }
+
+        protected override string FormatUnique(ColumnDefinition column)
+        {
+            return (column.IsUnique) ? "UNIQUE" : String.Empty;
+        }
     }
 }

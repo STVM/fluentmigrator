@@ -18,7 +18,7 @@ namespace FluentMigrator.Runner.Generators.Base
         {
             _typeMap = typeMap;
             _quoter = quoter;
-            ClauseOrder = new List<Func<ColumnDefinition, string>> { FormatString, FormatType, FormatCollation, FormatNullable, FormatDefaultValue, FormatPrimaryKey, FormatIdentity };
+            ClauseOrder = new List<Func<ColumnDefinition, string>> { FormatString, FormatType, FormatCollation, FormatNullable, FormatDefaultValue, FormatPrimaryKey, FormatIdentity, FormatUnique };
         }
 
         protected string GetTypeMap(DbType value, int size, int precision)
@@ -46,12 +46,14 @@ namespace FluentMigrator.Runner.Generators.Base
 
         protected virtual string FormatNullable(ColumnDefinition column)
         {
-			if (column.IsNullable.HasValue && column.IsNullable.Value) {
-				return string.Empty;
-			}
-			else {
-				return "NOT NULL";
-			}
+            if (column.IsNullable.HasValue && column.IsNullable.Value)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return "NOT NULL";
+            }
         }
 
         protected virtual string FormatDefaultValue(ColumnDefinition column)
@@ -70,6 +72,11 @@ namespace FluentMigrator.Runner.Generators.Base
             }
 
             return "DEFAULT " + Quoter.QuoteValue(column.DefaultValue);
+        }
+
+        protected virtual string FormatUnique(ColumnDefinition column)
+        {
+            return string.Empty;
         }
 
         protected abstract string FormatIdentity(ColumnDefinition column);

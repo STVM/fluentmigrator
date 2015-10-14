@@ -195,6 +195,14 @@ namespace FluentMigrator.Tests.Unit.Generators
             return expression;
         }
 
+        public static CreateTableExpression GetCreateTableExpressionWithUnique()
+        {
+          CreateTableExpression expression = new CreateTableExpression() { TableName = TestTableName1, };
+          expression.Columns.Add(new ColumnDefinition { Name = TestColumnName1, Type = DbType.String });
+          expression.Columns.Add(new ColumnDefinition { Name = TestColumnName2, Type = DbType.Int32, IsUnique = true});
+          return expression;
+        }
+
         public static CreateIndexExpression GetCreateIndexExpression()
         {
             var expression = new CreateIndexExpression();
