@@ -144,7 +144,7 @@ namespace FluentMigrator.Builders
             var column = _builder.Column;
             column.IsUnique = true;
 
-            var index = new CreateIndexExpression
+            /*var index = new CreateIndexExpression
             {
                 Index = new IndexDefinition
                 {
@@ -160,7 +160,7 @@ namespace FluentMigrator.Builders
                 Name = _builder.Column.Name
             });
 
-            _context.Expressions.Add(index);
+            _context.Expressions.Add(index);*/
         }
 
         public virtual void Indexed(string indexName)
